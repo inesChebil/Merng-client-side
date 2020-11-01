@@ -21,7 +21,8 @@ const Home = () => {
         {loading ? (
           <h1>Loading Posts ...</h1>
         ) : //  if there is posts
-        data.getPosts ? (
+        data ? (
+          data.getPosts &&
           data.getPosts.map((post) => (
             <Grid.Column key={post.id} style={{ marginBottom: 20 }}>
               <PostCard post={post} />

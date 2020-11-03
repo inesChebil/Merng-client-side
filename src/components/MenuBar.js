@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+
+// we need to import our authContext, wecause we ned to access to it, and change the navbar according to it
+import { AuthContext } from "../context/auth";
 function MenuBar() {
+  const { user, logout } = useContext(AuthContext);
   const pathname = window.location.pathname; //gives us the current path in the url for example :/about
   // substr(1) will remove "/" from "/login" so we get login
   const path = pathname === "/" ? "home" : pathname.substr(1);
@@ -9,7 +13,16 @@ function MenuBar() {
   const [activeItem, setActiveItem] = useState(path);
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
-  return (
+  // if we are logged in, if there is a user
+  const menuBar = user ? (
+    <Menu pointing secondary size="massive" color="teal">
+      <Menu.Item name={user.username} active as={Link} to="/" />
+
+      <Menu.Menu position="right">
+        <Menu.Item name="logout" onClick={logout} />
+      </Menu.Menu>
+    </Menu>
+  ) : (
     <Menu pointing secondary size="massive" color="teal">
       <Menu.Item
         name="home"
@@ -37,6 +50,7 @@ function MenuBar() {
       </Menu.Menu>
     </Menu>
   );
+  return menuBar;
 }
 
 export default MenuBar;

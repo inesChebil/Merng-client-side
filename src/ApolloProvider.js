@@ -8,7 +8,7 @@ import { setContext } from "apollo-link-context";
 
 const httpLink = createHttpLink({
   // link to the Graphql server
-  uri: "http://localhost:5000",
+  uri: "https://warm-refuge-45452.herokuapp.com/",
 });
 // (req,prevContext) but we don't need them in here
 // (req,prevContext) that we can get data and edit and forward to the next operation

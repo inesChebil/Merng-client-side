@@ -84,6 +84,7 @@ const CREATE_POST_MUTATION = gql`
         createdAt
       }
       commentCount
+      image
     }
   }
 `;

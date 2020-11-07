@@ -14,6 +14,7 @@ function Register(props) {
     email: "",
     password: "",
     confirmedPassword: "",
+    image: "",
   });
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
@@ -94,6 +95,15 @@ function Register(props) {
           value={values.confirmedPassword}
           onChange={onChange}
         />
+        <Form.Input
+          label="Photo"
+          placeholder="Add your Photo..."
+          name="image"
+          type="text"
+          error={errors.image ? true : false}
+          value={values.image}
+          onChange={onChange}
+        />
         <Button type="submit" primary>
           Register
         </Button>
@@ -122,6 +132,7 @@ const REGISTER_USER = gql`
     $email: String!
     $password: String!
     $confirmedPassword: String!
+    $image: String!
   ) {
     # this will trigger the register mutation which takes a registerInput (our server code)
     register(
@@ -130,6 +141,7 @@ const REGISTER_USER = gql`
         email: $email
         password: $password
         confirmedPassword: $confirmedPassword
+        image: $image
       }
     ) {
       # after register is triggered, we get a couple of fields back
